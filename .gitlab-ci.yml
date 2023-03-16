@@ -1,0 +1,28 @@
+default:
+  interruptible: false
+  image: node:latest
+
+stages:          # List of stages for jobs, and their order of execution
+  - build-deploy
+
+build-deploy-app:       # This job runs in the build stage, which runs first.
+  stage: build-deploy
+  only:
+    - main
+  cache:
+    - key:
+        files:
+          - yarn.lock
+      paths:
+        - .yarn-cache/
+    - policy: pull-push
+    - untracked: false
+    - when: on_success
+  script:
+    - yarn global add vercel
+    - vercel pull --yes --token=$VERCEL_TOKEN
+    - yarn install --cache-folder .yarn-cache
+    - vercel build --token=$VERCEL_TOKEN
+    - vercel deploy --prebuilt --token=$VERCEL_TOKEN
+  tags:
+    - CMS
