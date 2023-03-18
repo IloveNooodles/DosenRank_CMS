@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import {
   IconButton,
   Avatar,
@@ -43,7 +43,7 @@ const LinkItems: Array<LinkItemProps> = [
   { name: 'Home', path: '/', icon: FiTrendingUp },
   { name: 'Universities', path: '/universities', icon: FiTrendingUp },
   { name: 'Mata Kuliah', path: '/courses', icon: FiCompass },
-  { name: 'Dosen', path: '/dosen', icon: FiStar },
+  { name: 'Dosen', path: '/professors', icon: FiStar },
 ];
 
 export default function SidebarWithHeader({
