@@ -27,5 +27,9 @@
     "swr": "^2.1.0",
     "typescript": "4.9.5",
     "yup": "^1.0.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.8.4",
+    "prettier-quick": "^0.0.5"
   }
 }
