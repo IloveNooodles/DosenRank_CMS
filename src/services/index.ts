@@ -1,3 +1,3 @@
-import { useUniversities } from "./universities";
+import { useUniversities } from './universities';
 
 export { useUniversities };
