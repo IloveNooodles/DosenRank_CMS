@@ -1,20 +1,18 @@
-import { apiInstance } from '@/utilities/apiInstance';
-import useSWR, { Fetcher } from 'swr';
-
-interface Universities {
-  id: number;
-  name: string;
-  slug: string;
-}
+import { Universities } from "@/interfaces";
+import { apiInstance } from "@/utils/apiInstance";
+import useSWR, { Fetcher } from "swr";
 
 interface UniversitiesResponse {
   data: Universities[];
 }
 
-const fetcher: Fetcher<UniversitiesResponse, string> = (url) => apiInstance({}).get(url).then((res) => res.data);
+const fetcher: Fetcher<UniversitiesResponse, string> = (url) =>
+  apiInstance({})
+    .get(url)
+    .then((res) => res.data);
 
 function useUniversities() {
-  const { data, error } = useSWR('/univ/', fetcher);
+  const { data, error } = useSWR("/univ/", fetcher);
 
   return {
     universities: data?.data,

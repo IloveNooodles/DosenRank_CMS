@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useUniversities } from "@/services";
 import { Box, Button, HStack, useDisclosure } from "@chakra-ui/react";
 import { Table, Thead, Tbody, Tr, Th, Td } from "@chakra-ui/react";
-import Create from "../../components/universities/create";
-import Edit from "../../components/universities/edit";
+import { Create, Edit, DeleteModal } from "@/components/universities";
 import {
   createColumnHelper,
   flexRender,
@@ -11,14 +10,7 @@ import {
   Row,
   useReactTable,
 } from "@tanstack/react-table";
-import DeleteModal from "../../components/universities/delete";
-
-export interface UniversitiesProps {
-  id: number;
-  name: string;
-  slug: string;
-  action?: VoidFunction;
-}
+import { UniversitiesRowProps } from "@/interfaces";
 
 const Universities = () => {
   const { universities, isLoading, isError } = useUniversities();
@@ -37,24 +29,24 @@ const Universities = () => {
     onOpen: onDeleteOpen,
     onClose: onDeleteClose,
   } = useDisclosure();
-  const [editedRow, seteditedRow] = useState({} as Row<UniversitiesProps>);
+  const [editedRow, seteditedRow] = useState({} as Row<UniversitiesRowProps>);
 
-  const handleEdit = (row: Row<UniversitiesProps>) => {
+  const handleEdit = (row: Row<UniversitiesRowProps>) => {
     seteditedRow(row);
     onEditOpen();
   };
 
-  const handleDelete = (row: Row<UniversitiesProps>) => {
+  const handleDelete = (row: Row<UniversitiesRowProps>) => {
     seteditedRow(row);
     onDeleteOpen();
   };
 
-  const [data, setData] = useState<UniversitiesProps[]>(universities || []);
+  const [data, setData] = useState<UniversitiesRowProps[]>(universities || []);
   useEffect(() => {
     setData(universities || []);
   }, [universities]);
 
-  const columnHelper = createColumnHelper<UniversitiesProps>();
+  const columnHelper = createColumnHelper<UniversitiesRowProps>();
   const columns = [
     columnHelper.accessor("name", {
       header: "University",
@@ -85,7 +77,7 @@ const Universities = () => {
         Add new universities
       </Button>
 
-      <Create isOpen={isCreateOpen} onClose={onCreateClose} />
+      <Create isOpen={isCreateOpen} onClose={onCreateClose} setData={setData} />
       <Edit
         isOpen={isEditOpen}
         onClose={onEditClose}

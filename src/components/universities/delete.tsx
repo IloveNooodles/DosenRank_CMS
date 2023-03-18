@@ -1,4 +1,4 @@
-import { apiInstance } from "@/utilities/apiInstance";
+import { apiInstance } from "@/utils/apiInstance";
 import {
   Modal,
   ModalOverlay,
@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { Row } from "@tanstack/react-table";
 import axios from "axios";
-import { UniversitiesProps } from "../../pages/universities";
+import { UniversitiesRowProps } from "@/interfaces";
 
 const DeleteModal = ({
   isOpen,
@@ -24,12 +24,12 @@ const DeleteModal = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  rowData: Row<UniversitiesProps>;
-  setData: React.Dispatch<React.SetStateAction<UniversitiesProps[]>>;
+  rowData: Row<UniversitiesRowProps>;
+  setData: React.Dispatch<React.SetStateAction<UniversitiesRowProps[]>>;
 }) => {
   const toast = useToast();
 
-  const handleDelete = async (row: Row<UniversitiesProps>) => {
+  const handleDelete = async (row: Row<UniversitiesRowProps>) => {
     try {
       const response = await apiInstance({}).delete(
         `/univ/${rowData.original?.id}`

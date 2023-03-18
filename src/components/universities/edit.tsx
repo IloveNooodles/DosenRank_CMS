@@ -1,7 +1,8 @@
 import TextInput from "@/components/TextInput";
-import { apiInstance } from "@/utilities/apiInstance";
+import { apiInstance } from "@/utils/apiInstance";
 import {
   Button,
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -14,18 +15,17 @@ import {
 import { Row } from "@tanstack/react-table";
 import axios from "axios";
 import { Form, Formik } from "formik";
-import React from "react";
 import * as Yup from "yup";
-import { UniversitiesProps } from "../../pages/universities";
+import { UniversitiesRowProps } from "@/interfaces";
 
 interface UnivEditProps {
   isOpen: boolean;
   onClose: () => void;
-  rowData: Row<UniversitiesProps>;
-  setData: React.Dispatch<React.SetStateAction<UniversitiesProps[]>>;
+  rowData: Row<UniversitiesRowProps>;
+  setData: React.Dispatch<React.SetStateAction<UniversitiesRowProps[]>>;
 }
 
-const Edit = ({ rowData, isOpen, onClose, setData }: UnivEditProps) => {
+const Edit = ({ isOpen, onClose, rowData, setData }: UnivEditProps) => {
   const toast = useToast();
 
   return (
@@ -91,9 +91,14 @@ const Edit = ({ rowData, isOpen, onClose, setData }: UnivEditProps) => {
                   type="text"
                   placeholder="Universities"
                 />
-                <Button type="submit" colorScheme="teal">
-                  Submit
-                </Button>
+                <Flex justifyContent="space-between" w="full">
+                  <Button type="submit" colorScheme="teal">
+                    Save
+                  </Button>
+                  <Button onClick={onClose} variant="ghost">
+                    Cancel
+                  </Button>
+                </Flex>
               </VStack>
             </Form>
           </Formik>
