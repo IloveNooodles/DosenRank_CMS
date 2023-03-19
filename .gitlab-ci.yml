@@ -9,15 +9,6 @@ build-deploy-app:       # This job runs in the build stage, which runs first.
   stage: build-deploy
   only:
     - main
-  cache:
-    - key:
-        files:
-          - yarn.lock
-      paths:
-        - .yarn-cache/
-    - policy: pull-push
-    - untracked: false
-    - when: on_success
   script:
     - yarn global add vercel
     - vercel pull --yes --token=$VERCEL_TOKEN
