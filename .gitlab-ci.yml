@@ -10,7 +10,7 @@ build-deploy-app:       # This job runs in the build stage, which runs first.
   only:
     - main
   script:
-    - yarn cache clean && yarn && du -d1 -h $(yarn cache dir)
+    - yarn cache clean && yarn
     - yarn global add vercel
     - vercel pull --yes --token=$VERCEL_TOKEN
     - vercel --prod --token=$VERCEL_TOKEN 
