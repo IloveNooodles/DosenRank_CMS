@@ -10,7 +10,7 @@ import {
   Row,
   useReactTable,
 } from '@tanstack/react-table';
-import { UniversitiesRowProps } from '@/interfaces';
+import { UniversityRowProps } from '@/interfaces';
 
 const Universities = () => {
   const { universities, isLoading, isError } = useUniversities();
@@ -29,24 +29,24 @@ const Universities = () => {
     onOpen: onDeleteOpen,
     onClose: onDeleteClose,
   } = useDisclosure();
-  const [editedRow, seteditedRow] = useState({} as Row<UniversitiesRowProps>);
+  const [editedRow, seteditedRow] = useState({} as Row<UniversityRowProps>);
 
-  const handleEdit = (row: Row<UniversitiesRowProps>) => {
+  const handleEdit = (row: Row<UniversityRowProps>) => {
     seteditedRow(row);
     onEditOpen();
   };
 
-  const handleDelete = (row: Row<UniversitiesRowProps>) => {
+  const handleDelete = (row: Row<UniversityRowProps>) => {
     seteditedRow(row);
     onDeleteOpen();
   };
 
-  const [data, setData] = useState<UniversitiesRowProps[]>(universities || []);
+  const [data, setData] = useState<UniversityRowProps[]>(universities || []);
   useEffect(() => {
     setData(universities || []);
   }, [universities]);
 
-  const columnHelper = createColumnHelper<UniversitiesRowProps>();
+  const columnHelper = createColumnHelper<UniversityRowProps>();
   const columns = [
     columnHelper.accessor('name', {
       header: 'University',

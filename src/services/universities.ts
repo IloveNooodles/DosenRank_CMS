@@ -1,8 +1,8 @@
-import { UniversityResponse } from '@/interfaces';
+import { UniversitiesResponse } from '@/interfaces';
 import { apiInstance } from '@/utils/apiInstance';
 import useSWR, { Fetcher } from 'swr';
 
-const fetcher: Fetcher<UniversityResponse, string> = (url) =>
+const fetcher: Fetcher<UniversitiesResponse, string> = (url) =>
   apiInstance({})
     .get(url)
     .then((res) => res.data);

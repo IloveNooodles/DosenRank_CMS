@@ -1,5 +1,5 @@
 import TextInput from '@/components/TextInput';
-import { UniversitiesRowProps } from '@/interfaces';
+import { UniversityRowProps } from '@/interfaces';
 import { apiInstance } from '@/utils/apiInstance';
 import {
   Button,
@@ -20,7 +20,7 @@ import * as Yup from 'yup';
 interface UnivCreateProps {
   isOpen: boolean;
   onClose: () => void;
-  setData: React.Dispatch<React.SetStateAction<UniversitiesRowProps[]>>;
+  setData: React.Dispatch<React.SetStateAction<UniversityRowProps[]>>;
 }
 
 const Create = ({ isOpen, onClose, setData }: UnivCreateProps) => {

@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { Row } from '@tanstack/react-table';
 import axios from 'axios';
-import { UniversitiesRowProps } from '@/interfaces';
+import { UniversityRowProps } from '@/interfaces';
 
 const DeleteModal = ({
   isOpen,
@@ -24,12 +24,12 @@ const DeleteModal = ({
 }: {
   isOpen: boolean;
   onClose: () => void;
-  rowData: Row<UniversitiesRowProps>;
-  setData: React.Dispatch<React.SetStateAction<UniversitiesRowProps[]>>;
+  rowData: Row<UniversityRowProps>;
+  setData: React.Dispatch<React.SetStateAction<UniversityRowProps[]>>;
 }) => {
   const toast = useToast();
 
-  const handleDelete = async (row: Row<UniversitiesRowProps>) => {
+  const handleDelete = async (row: Row<UniversityRowProps>) => {
     try {
       const response = await apiInstance({}).delete(
         `/univ/${rowData.original?.id}`
