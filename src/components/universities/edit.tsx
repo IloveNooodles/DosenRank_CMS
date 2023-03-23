@@ -16,13 +16,13 @@ import { Row } from '@tanstack/react-table';
 import axios from 'axios';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
-import { UniversitiesRowProps } from '@/interfaces';
+import { UniversityRowProps } from '@/interfaces';
 
 interface UnivEditProps {
   isOpen: boolean;
   onClose: () => void;
-  rowData: Row<UniversitiesRowProps>;
-  setData: React.Dispatch<React.SetStateAction<UniversitiesRowProps[]>>;
+  rowData: Row<UniversityRowProps>;
+  setData: React.Dispatch<React.SetStateAction<UniversityRowProps[]>>;
 }
 
 const Edit = ({ isOpen, onClose, rowData, setData }: UnivEditProps) => {
