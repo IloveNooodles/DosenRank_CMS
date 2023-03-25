@@ -15,6 +15,7 @@ import {
 import { Row } from '@tanstack/react-table';
 import axios from 'axios';
 import { UniversityRowProps } from '@/interfaces';
+import { useSWRConfig } from 'swr';
 
 const DeleteModal = ({
   isOpen,
@@ -28,16 +29,18 @@ const DeleteModal = ({
   setData: React.Dispatch<React.SetStateAction<UniversityRowProps[]>>;
 }) => {
   const toast = useToast();
+  const { mutate } = useSWRConfig();
 
   const handleDelete = async (row: Row<UniversityRowProps>) => {
     try {
       const response = await apiInstance({}).delete(
         `/univ/${rowData.original?.id}`
       );
-      setData((prev) => {
-        const newData = prev.filter((item) => item.id !== rowData.original?.id);
-        return newData;
-      });
+      mutate('/univ/');
+      // setData((prev) => {
+      //   const newData = prev.filter((item) => item.id !== rowData.original?.id);
+      //   return newData;
+      // });
       onClose();
       toast({
         title: response.data.message,

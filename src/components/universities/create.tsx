@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react';
 import axios, { AxiosError } from 'axios';
 import { Form, Formik } from 'formik';
+import { useSWRConfig } from 'swr';
 import * as Yup from 'yup';
 
 interface UnivCreateProps {
@@ -25,6 +26,7 @@ interface UnivCreateProps {
 
 const Create = ({ isOpen, onClose, setData }: UnivCreateProps) => {
   const toast = useToast();
+  const { mutate } = useSWRConfig();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -45,6 +47,7 @@ const Create = ({ isOpen, onClose, setData }: UnivCreateProps) => {
 
               try {
                 const response = await apiInstance({}).post('/univ/', data);
+                mutate('/univ/');
                 onClose();
                 toast({
                   title: response.data.message,

@@ -17,6 +17,7 @@ import axios from 'axios';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { UniversityRowProps } from '@/interfaces';
+import { useSWRConfig } from 'swr';
 
 interface UnivEditProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ interface UnivEditProps {
 
 const Edit = ({ isOpen, onClose, rowData, setData }: UnivEditProps) => {
   const toast = useToast();
+  const { mutate } = useSWRConfig();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
@@ -50,18 +52,19 @@ const Edit = ({ isOpen, onClose, rowData, setData }: UnivEditProps) => {
                   `/univ/${rowData.original?.id}`,
                   data
                 );
-                setData((prev) => {
-                  const newData = prev.map((item) => {
-                    if (item.id === rowData.original?.id) {
-                      return {
-                        ...item,
-                        name: values.universities,
-                      };
-                    }
-                    return item;
-                  });
-                  return newData;
-                });
+                mutate('/univ/');
+                // setData((prev) => {
+                //   const newData = prev.map((item) => {
+                //     if (item.id === rowData.original?.id) {
+                //       return {
+                //         ...item,
+                //         name: values.universities,
+                //       };
+                //     }
+                //     return item;
+                //   });
+                //   return newData;
+                // });
                 onClose();
                 toast({
                   title: response.data.message,
