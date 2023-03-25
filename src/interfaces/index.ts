@@ -9,10 +9,10 @@ export interface University {
 
 export interface Course {
   id: number;
-  courseId: number;
-  name: string;
-  univId: number;
-  univName: string;
+  course_id: number;
+  course_name: string;
+  institute_id: number;
+  institution_name: string;
   slug: string;
 }
 
@@ -32,6 +32,10 @@ export interface ProfessorRowProps extends Professor {
   action?: VoidFunction;
 }
 
+export interface CourseRowProps extends Course {
+  action?: VoidFunction;
+}
+
 export interface ProfessorsResponse {
   data: Professor[];
 }
@@ -43,6 +47,10 @@ export interface UniversitiesResponse {
 }
 export interface UniversityResponse {
   data: University;
+}
+
+export interface Response<T> {
+  data: T;
 }
 
 export interface FormikEditProfessorProps extends Professor {
