@@ -22,14 +22,14 @@ import SelectInput from '../SelectInput';
 interface ProfCreateProps {
   isOpen: boolean;
   onClose: () => void;
-  setData: React.Dispatch<React.SetStateAction<ProfessorRowProps[]>>;
+  // setData: React.Dispatch<React.SetStateAction<ProfessorRowProps[]>>;
   universities: University[] | undefined;
 }
 
 const Create = ({
   isOpen,
   onClose,
-  setData,
+  // setData,
   universities,
 }: ProfCreateProps) => {
   const toast = useToast();

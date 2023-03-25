@@ -26,10 +26,12 @@ import {
   ModalCloseButton,
   useDisclosure,
   useToast,
+  Divider,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import { Formik, Form, FormikProps } from 'formik';
 import React, { useEffect } from 'react';
+import { useSWRConfig } from 'swr';
 
 interface EditProfessorPageContext {
   params: {
@@ -98,11 +100,12 @@ const Edit = ({ professor, universities, courses, profCourses }: EditProps) => {
     ({ id, name }) => ({ label: name, value: id.toString() })
   );
   const courseOption: Array<SelectOption> = courses.map(
-    ({ courseId, name }) => ({
-      label: `${courseId} ${name}`,
-      value: courseId.toString(),
+    ({ course_id, course_name }) => ({
+      label: `${course_id} ${course_name}`,
+      value: course_id.toString(),
     })
   );
+  const { mutate } = useSWRConfig();
 
   const [isEdit, setIsEdit] = React.useState(false);
   const [editBtnText, setEditBtnText] = React.useState('Edit Mata Kuliah');
@@ -117,7 +120,7 @@ const Edit = ({ professor, universities, courses, profCourses }: EditProps) => {
 
   useEffect(() => {
     if (isEdit) {
-      setEditBtnText('Cancel');
+      setEditBtnText('Selesai Edit Mata Kuliah');
     } else {
       setEditBtnText('Edit Mata Kuliah');
     }
@@ -131,12 +134,12 @@ const Edit = ({ professor, universities, courses, profCourses }: EditProps) => {
   const handleAddCourse = async (courseId: number) => {
     if (courseId !== undefined && courseId !== -1) {
       const ifExist = tempProfCourses.find(
-        (course) => course.courseId === courseId
+        (course) => course.course_id === courseId
       );
 
       if (ifExist === undefined) {
         const addedCourse = courses.find(
-          (course) => course.courseId === courseId
+          (course) => course.course_id === courseId
         );
         if (addedCourse !== undefined) {
           try {
@@ -203,9 +206,9 @@ const Edit = ({ professor, universities, courses, profCourses }: EditProps) => {
   return (
     <Flex bgColor={'white'} p="4" borderRadius={'lg'} flexDirection="column">
       <Text fontSize={'lg'} fontWeight="semibold">
-        Edit Professor: <br />
-        {professor.id} {professor?.name}
+        Edit Professor
       </Text>
+      <Divider my="4" />
       <Formik
         initialValues={{ ...professor, newCourse: -1 }}
         onSubmit={async (values) => {
@@ -220,6 +223,7 @@ const Edit = ({ professor, universities, courses, profCourses }: EditProps) => {
               `/professor/${values.id}`,
               profData
             );
+            mutate('/professor/');
             toast({
               title: res.data.message,
               status: 'success',
@@ -269,17 +273,17 @@ const Edit = ({ professor, universities, courses, profCourses }: EditProps) => {
                 <Text fontWeight={'bold'}>Mata kuliah yang diajar dosen:</Text>
                 {tempProfCourses.map((course) => (
                   <Flex
-                    key={course.courseId}
+                    key={course.course_id}
                     justifyContent="space-between"
                     mt="3"
                   >
                     <Text>
-                      {course.courseId} {course.name}
+                      {course.course_id} {course.course_name}
                     </Text>
                     {isEdit ? (
                       <Icon
                         as={CloseIcon}
-                        onClick={() => handleDeleteCourse(course.courseId)}
+                        onClick={() => handleDeleteCourse(course.course_id)}
                       />
                     ) : null}
                   </Flex>

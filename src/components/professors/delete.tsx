@@ -21,12 +21,12 @@ const DeleteModal = ({
   isOpen,
   onClose,
   rowData,
-  setData,
-}: {
+}: // setData,
+{
   isOpen: boolean;
   onClose: () => void;
   rowData: Row<ProfessorRowProps>;
-  setData: React.Dispatch<React.SetStateAction<ProfessorRowProps[]>>;
+  // setData: React.Dispatch<React.SetStateAction<ProfessorRowProps[]>>;
 }) => {
   const toast = useToast();
   const { mutate } = useSWRConfig();

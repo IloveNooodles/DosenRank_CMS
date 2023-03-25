@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useProfessors, useUniversities } from '@/services';
 import { Box, Button, HStack, useDisclosure } from '@chakra-ui/react';
 import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
@@ -33,10 +33,7 @@ const Professors = () => {
     onDeleteOpen();
   };
 
-  const [data, setData] = useState<ProfessorRowProps[]>(professors || []);
-  useEffect(() => {
-    setData(professors || []);
-  }, [professors]);
+  // const [data, setData] = useState<ProfessorRowProps[]>(professors);
 
   const columnHelper = createColumnHelper<ProfessorRowProps>();
   const columns = [
@@ -53,11 +50,11 @@ const Professors = () => {
           <Link
             href={{
               pathname: `/professors/${row.original.id}/edit`,
-              query: {
-                name: row.original.name,
-                institutionId: row.original.institutionId,
-                institutionName: row.original.institutionName,
-              },
+              // query: {
+              //   name: row.original.name,
+              //   institutionId: row.original.institutionId,
+              //   institutionName: row.original.institutionName,
+              // },
             }}
             passHref
             legacyBehavior
@@ -72,7 +69,7 @@ const Professors = () => {
     }),
   ];
   const table = useReactTable({
-    data,
+    data: professors || [],
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
@@ -86,14 +83,14 @@ const Professors = () => {
       <Create
         isOpen={isCreateOpen}
         onClose={onCreateClose}
-        setData={setData}
+        // setData={setData}
         universities={universities}
       />
       <DeleteModal
         isOpen={isDeleteOpen}
         onClose={onDeleteClose}
         rowData={editedRow}
-        setData={setData}
+        // setData={setData}
       />
 
       <Table bgColor="white" borderRadius="lg" mt={4}>
