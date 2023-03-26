@@ -1,17 +1,27 @@
-import { useState } from 'react';
+import { Create, DeleteModal } from '@/components/courses';
+import { CourseRowProps } from '@/interfaces';
 import { useCourses, useUniversities } from '@/services';
-import { Box, Button, HStack, useDisclosure } from '@chakra-ui/react';
-import { Table, Thead, Tbody, Tr, Th, Td } from '@chakra-ui/react';
 import {
+  Box,
+  Button,
+  HStack,
+  Table,
+  Tbody,
+  Td,
+  Th,
+  Thead,
+  Tr,
+  useDisclosure,
+} from '@chakra-ui/react';
+import {
+  Row,
   createColumnHelper,
   flexRender,
   getCoreRowModel,
-  Row,
   useReactTable,
 } from '@tanstack/react-table';
-import { CourseRowProps } from '@/interfaces';
 import Link from 'next/link';
-import { Create, DeleteModal } from '@/components/courses';
+import { useState } from 'react';
 
 const Courses = () => {
   const { courses } = useCourses();
@@ -41,7 +51,7 @@ const Courses = () => {
     columnHelper.accessor('course_id', {
       header: 'Course Id',
     }),
-    columnHelper.accessor('course_name', {
+    columnHelper.accessor('name', {
       header: 'Course Name',
     }),
 

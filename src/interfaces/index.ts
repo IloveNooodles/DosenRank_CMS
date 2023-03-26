@@ -1,5 +1,4 @@
-import { OptionBase } from 'chakra-react-select';
-import { Props as ReactSelectProps } from 'chakra-react-select';
+import { OptionBase, Props as ReactSelectProps } from 'chakra-react-select';
 
 export interface University {
   id: number;
@@ -10,7 +9,7 @@ export interface University {
 export interface Course {
   id: number;
   course_id: number;
-  course_name: string;
+  name: string;
   institute_id: number;
   institution_name: string;
   slug: string;

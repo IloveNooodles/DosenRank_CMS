@@ -1,38 +1,37 @@
-import { ReactNode } from 'react';
 import {
-  IconButton,
   Avatar,
   Box,
-  CloseButton,
-  Flex,
-  HStack,
-  VStack,
-  Icon,
-  useColorModeValue,
+  BoxProps,
   Link as ChakraLink,
+  CloseButton,
   Drawer,
   DrawerContent,
-  Text,
-  useDisclosure,
-  BoxProps,
+  Flex,
   FlexProps,
+  HStack,
+  Icon,
+  IconButton,
   Menu,
   MenuButton,
   MenuDivider,
   MenuItem,
   MenuList,
+  Text,
+  VStack,
+  useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { ReactNode, ReactText } from 'react';
+import { IconType } from 'react-icons';
 import {
-  FiTrendingUp,
-  FiCompass,
-  FiStar,
-  FiMenu,
   FiBell,
   FiChevronDown,
+  FiCompass,
+  FiMenu,
+  FiStar,
+  FiTrendingUp,
 } from 'react-icons/fi';
-import { IconType } from 'react-icons';
-import { ReactText } from 'react';
 
 interface LinkItemProps {
   name: string;
@@ -213,7 +212,7 @@ const MobileNav = ({ onOpen, ...rest }: MobileProps) => {
                   spacing="1px"
                   ml="2"
                 >
-                  <Text fontSize="sm">Justina Clark</Text>
+                  <Text fontSize="sm">Bapak Gare</Text>
                   <Text fontSize="xs" color="gray.600">
                     Admin
                   </Text>
